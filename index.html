@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAVENIS AI – Unsichtbare Sicherheit, Omnisciente Gesundheit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --graphit: #2C2C2C;
+            --white: #FFFFFF;
+            --cyan: #00D9FF;
+            --dark-cyan: #0099CC;
+            --grey-blue: #4A5568;
+            --soft-white: #F7FAFC;
+            --neon-cyan: #7DF9FF;
+            --alert-red: #FF4444;
+            --success-green: #00CC88;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(180deg, #0A0C0F 0%, #101215 100%);
+            color: var(--soft-white);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            padding: 80px 20px;
+            overflow: hidden;
+            background: radial-gradient(1200px 600px at 75% 30%, rgba(0,217,255,0.08), transparent 60%);
+        }
+
+        .hero-bg {
+            position: absolute; inset: 0; z-index: 1; pointer-events: none;
+            background: radial-gradient(60% 35% at 80% 30%, rgba(0,217,255,0.10), transparent 70%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+            margin-bottom: 24px;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.06);
+            color: var(--soft-white);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 8px 14px;
+            font: 600 13px/1 'Inter';
+            cursor: pointer;
+            transition: all .2s ease;
+        }
+
+        .lang-btn:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+        .lang-btn.active { background: rgba(0,217,255,0.12); border-color: var(--cyan); }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(32px, 5vw, 56px);
+            line-height: 1.1;
+            margin-bottom: 16px;
+            text-shadow: 0 0 18px rgba(0,217,255,0.18);
+        }
+
+        .kicker {
+            font: 600 12px/1 'Inter';
+            color: #B7C2CB;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .subhead {
+            font-size: clamp(16px, 2.4vw, 20px);
+            color: #DAE3EA;
+            margin-bottom: 16px;
+        }
+
+        .pipeline {
+            font: 500 14px/1.5 'Fira Code', monospace;
+            color: var(--cyan);
+            margin-bottom: 20px;
+            padding: 12px;
+            background: rgba(0,217,255,0.05);
+            border-left: 3px solid var(--cyan);
+        }
+
+        .badges {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0,217,255,0.10);
+            border: 1px solid rgba(0,217,255,0.35);
+            padding: 10px 14px;
+            border-radius: 12px;
+            font: 500 13px/1.2 'Inter';
+        }
+
+        .cta {
+            background: linear-gradient(90deg, var(--cyan), var(--neon-cyan));
+            color: #02131A;
+            border: 0;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font: 700 16px/1 'Inter';
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0,217,255,0.28);
+            transition: transform .15s ease;
+        }
+
+        .cta:hover { transform: translateY(-2px); }
+
+        .visual-card {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(28px, 4vw, 42px);
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .three-pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .pillar-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0,217,255,0.2);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all .3s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--cyan);
+            box-shadow: 0 12px 32px rgba(0,217,255,0.2);
+        }
+
+        .pillar-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .pillar-title {
+            font: 600 24px/1.2 'Orbitron';
+            margin-bottom: 12px;
+        }
+
+        .validation-badge {
+            display: inline-block;
+            background: rgba(0,204,136,0.15);
+            color: var(--success-green);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font: 600 12px/1 'Inter';
+            margin-top: 8px;
+        }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 24px;
+            background: rgba(0,217,255,0.05);
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font: 700 36px/1 'Orbitron';
+            color: var(--cyan);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font: 500 14px/1.4 'Inter';
+            color: #B7C2CB;
+        }
+
+        .investment-visual {
+            background: rgba(0,217,255,0.03);
+            border: 1px solid rgba(0,217,255,0.2);
+            border-radius: 16px;
+            padding: 48px;
+            margin-top: 32px;
+        }
+
+        .use-of-funds {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .fund-item {
+            text-align: center;
+        }
+
+        .fund-percentage {
+            font: 700 48px/1 'Orbitron';
+            color: var(--cyan);
+            margin-bottom: 8px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .team-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .team-name {
+            font: 700 20px/1.2 'Inter';
+            margin-bottom: 8px;
+        }
+
+        .team-role {
+            font: 600 14px/1.2 'Inter';
+            color: var(--cyan);
+            margin-bottom: 12px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 48px auto 0;
+            padding: 32px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0,217,255,0.2);
+            border-radius: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font: 600 14px/1 'Inter';
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            color: var(--white);
+            font: 400 14px/1.4 'Inter';
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--cyan);
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .use-of-funds { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <nav class="lang-switch">
+                <button class="lang-btn active" data-lang="de">DE</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="fr">FR</button>
+            </nav>
+
+            <div class="hero-grid">
+                <div>
+                    <p class="kicker" data-i18n="hero-kicker">DeepTech • WiFi+AI • Privacy‑First</p>
+                    <h1 data-i18n="hero-headline">Sicherheit, die niemand sieht – Gesundheit, die alles bemerkt</h1>
+                    <p class="subhead" data-i18n="hero-subhead">KI rekonstruiert 3D‑Körperhaltung und Vitaldaten aus Wi‑Fi‑Reflexionen – ohne Kamera, Mikrofon oder Wearable.</p>
+
+                    <div class="pipeline" data-i18n="hero-pipeline">Wi‑Fi‑Router → CSI‑Extraktion → Edge AI (Hailo‑8) → SENSING CORE → 3D‑Pose + Vitaldaten → Cloud‑Dashboard</div>
+
+                    <ul class="badges">
+                        <li class="badge">🛡️ <span data-i18n="badge1">98,7% Sturzerkennung (TU München, 2024)</span></li>
+                        <li class="badge">🫁 <span data-i18n="badge2">±0,22 MAE Atemfrequenz (ETH Zürich, 2024)</span></li>
+                        <li class="badge">💓 <span data-i18n="badge3">r=0,94 Herzfrequenz‑Korrelation (Fraunhofer IIS, 2024)</span></li>
+                    </ul>
+
+                    <button class="cta" data-i18n="cta-pitch">Pitchdeck anfordern</button>
+                </div>
+
+                <div class="visual-card">
+                    <!-- 3D Visual placeholder -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNOLOGIE SECTION -->
+    <section id="technologie">
+        <div class="container">
+            <h2 class="section-title" data-i18n="tech-title">Wissenschaftlich Validierte Technologie</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 48px; font-size: 18px; color: #DAE3EA;" data-i18n="tech-intro">
+                HAVENIS AI nutzt Channel State Information (CSI) aus Standard‑WiFi‑Routern, um durch Machine Learning auf dem Edge‑Chip Hailo‑8 DensePose‑Level‑Genauigkeit zu erreichen.
+            </p>
+
+            <div class="market-stats">
+                <div class="stat-card">
+                    <div class="stat-value">1000 Hz</div>
+                    <div class="stat-label" data-i18n="stat1">CSI-Sampling Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">&lt;100ms</div>
+                    <div class="stat-label" data-i18n="stat2">Edge Latency</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">26 TOPS</div>
+                    <div class="stat-label" data-i18n="stat3">Hailo-8 Performance</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">GDPR</div>
+                    <div class="stat-label" data-i18n="stat4">Art. 25 Compliant</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DREI SÄULEN SECTION -->
+    <section>
+        <div class="container">
+            <h2 class="section-title" data-i18n="pillars-title">Drei Funktionssäulen</h2>
+
+            <div class="three-pillars">
+                <div class="pillar-card">
+                    <div class="pillar-icon">🛡️</div>
+                    <h3 class="pillar-title" data-i18n="pillar1-title">Prädiktive Sicherheit</h3>
+                    <p data-i18n="pillar1-desc">Anomale Bewegungsmuster werden erkannt und frühzeitig gemeldet – ohne invasive Kameras.</p>
+                    <span class="validation-badge">&gt;95% Accuracy</span>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-icon">🚨</div>
+                    <h3 class="pillar-title" data-i18n="pillar2-title">Notfallprävention</h3>
+                    <p data-i18n="pillar2-desc">Echtzeit-Sturzerkennung mit automatischer Alarmierung.</p>
+                    <span class="validation-badge">98,7% (TU München)</span>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-icon">💓</div>
+                    <h3 class="pillar-title" data-i18n="pillar3-title">Vitalmonitoring</h3>
+                    <p data-i18n="pillar3-desc">Kontaktlose Atem- und Herzfrequenzmessung für nächtliche Gesundheitsberichte.</p>
+                    <span class="validation-badge">±0,22 MAE (ETH Zürich)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARKT SECTION -->
+    <section style="background: rgba(0,217,255,0.03);">
+        <div class="container">
+            <h2 class="section-title" data-i18n="market-title">Markt & Wachstum</h2>
+
+            <div class="market-stats">
+                <div class="stat-card">
+                    <div class="stat-value">$150 Mrd</div>
+                    <div class="stat-label" data-i18n="tam">TAM (2030)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$15 Mrd</div>
+                    <div class="stat-label" data-i18n="sam">SAM (Privacy-First)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$180 Mio</div>
+                    <div class="stat-label" data-i18n="som">SOM (DACH HNWIs)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">18,7%</div>
+                    <div class="stat-label" data-i18n="cagr">HealthTech CAGR</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INVESTMENT SECTION -->
+    <section id="investment">
+        <div class="container">
+            <h2 class="section-title" data-i18n="invest-title">Investment-Opportunität</h2>
+
+            <div class="investment-visual">
+                <div style="text-align: center; margin-bottom: 32px;">
+                    <div style="font: 700 56px/1 'Orbitron'; color: var(--cyan); margin-bottom: 12px;">€800k</div>
+                    <div style="font: 600 20px/1 'Inter'; color: #DAE3EA;" data-i18n="seeking">Seed-Runde | 20% Equity | €3,2M Pre-Money</div>
+                </div>
+
+                <h3 style="text-align: center; font: 600 24px/1.2 'Inter'; margin-bottom: 24px;" data-i18n="use-title">Use of Funds</h3>
+                <div class="use-of-funds">
+                    <div class="fund-item">
+                        <div class="fund-percentage">40%</div>
+                        <div style="font: 600 16px/1.2 'Inter'; color: #DAE3EA; margin-bottom: 8px;" data-i18n="fund1">R&D</div>
+                        <div style="font: 400 14px/1.4 'Inter'; color: #B7C2CB;" data-i18n="fund1-detail">SENSING CORE, Edge-AI, Patente</div>
+                    </div>
+                    <div class="fund-item">
+                        <div class="fund-percentage">30%</div>
+                        <div style="font: 600 16px/1.2 'Inter'; color: #DAE3EA; margin-bottom: 8px;" data-i18n="fund2">Team</div>
+                        <div style="font: 400 14px/1.4 'Inter'; color: #B7C2CB;" data-i18n="fund2-detail">2x AI Engineer, 1x Embedded, 0.5x CMO</div>
+                    </div>
+                    <div class="fund-item">
+                        <div class="fund-percentage">30%</div>
+                        <div style="font: 600 16px/1.2 'Inter'; color: #DAE3EA; margin-bottom: 8px;" data-i18n="fund3">GTM</div>
+                        <div style="font: 400 14px/1.4 'Inter'; color: #B7C2CB;" data-i18n="fund3-detail">10 Beta, Partner, PR/Events</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 48px; text-align: center;">
+                    <div style="font: 600 18px/1.4 'Inter'; color: var(--cyan); margin-bottom: 16px;" data-i18n="exit">Exit 2027–2028 | 8–12× ARR Multiple</div>
+                    <div style="font: 400 14px/1.4 'Inter'; color: #B7C2CB;" data-i18n="exit-detail">M&A-Gespräche: Google Nest, Amazon, Apple</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section>
+        <div class="container">
+            <h2 class="section-title" data-i18n="team-title">Team & Advisory</h2>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-name">Danilo Kuss</div>
+                    <div class="team-role">CEO & Founder</div>
+                    <p style="font: 400 14px/1.5 'Inter'; color: #B7C2CB;">Sensorfusion, AI-Edge-Computing</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-name">Sarah Le Roux</div>
+                    <div class="team-role">COO</div>
+                    <p style="font: 400 14px/1.5 'Inter'; color: #B7C2CB;">MBA INSEAD | 10 Jahre B2B (Siemens)</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-name">Advisory Board</div>
+                    <div class="team-role">Experten</div>
+                    <p style="font: 400 14px/1.5 'Inter'; color: #B7C2CB;">TU München | ETH Zürich | Fraunhofer IIS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section style="background: rgba(0,217,255,0.03);">
+        <div class="container">
+            <h2 class="section-title" data-i18n="contact-title">Kontakt aufnehmen</h2>
+
+            <form class="contact-form">
+                <div class="form-group">
+                    <label data-i18n="form-name">Name</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="form-email">E-Mail</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="form-org">Organisation</label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="form-message">Nachricht</label>
+                    <textarea rows="4"></textarea>
+                </div>
+                <button type="submit" class="cta" style="width: 100%;" data-i18n="form-submit">Pitchdeck anfordern</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // i18n translations
+        const translations = {
+            de: {
+                "hero-kicker": "DeepTech • WiFi+AI • Privacy‑First",
+                "hero-headline": "Sicherheit, die niemand sieht – Gesundheit, die alles bemerkt",
+                "hero-subhead": "KI rekonstruiert 3D‑Körperhaltung und Vitaldaten aus Wi‑Fi‑Reflexionen – ohne Kamera, Mikrofon oder Wearable.",
+                "hero-pipeline": "Wi‑Fi‑Router → CSI‑Extraktion → Edge AI (Hailo‑8) → SENSING CORE → 3D‑Pose + Vitaldaten → Cloud‑Dashboard",
+                "badge1": "98,7% Sturzerkennung (TU München, 2024)",
+                "badge2": "±0,22 MAE Atemfrequenz (ETH Zürich, 2024)",
+                "badge3": "r=0,94 Herzfrequenz‑Korrelation (Fraunhofer IIS, 2024)",
+                "cta-pitch": "Pitchdeck anfordern",
+                "tech-title": "Wissenschaftlich Validierte Technologie",
+                "tech-intro": "HAVENIS AI nutzt Channel State Information (CSI) aus Standard‑WiFi‑Routern, um durch Machine Learning auf dem Edge‑Chip Hailo‑8 DensePose‑Level‑Genauigkeit zu erreichen.",
+                "pillars-title": "Drei Funktionssäulen",
+                "market-title": "Markt & Wachstum",
+                "invest-title": "Investment-Opportunität",
+                "team-title": "Team & Advisory",
+                "contact-title": "Kontakt aufnehmen",
+                "seeking": "Seed-Runde | 20% Equity | €3,2M Pre-Money",
+                "use-title": "Use of Funds",
+                "exit": "Exit 2027–2028 | 8–12× ARR Multiple",
+                "exit-detail": "M&A-Gespräche: Google Nest, Amazon, Apple"
+            },
+            en: {
+                "hero-kicker": "DeepTech • WiFi+AI • Privacy‑First",
+                "hero-headline": "Security no one sees – Health that notices everything",
+                "hero-subhead": "AI reconstructs 3D body pose and vitals from Wi‑Fi reflections — no cameras, microphones, or wearables.",
+                "hero-pipeline": "Wi‑Fi Router → CSI Extraction → Edge AI (Hailo‑8) → SENSING CORE → 3D Pose + Vitals → Cloud Dashboard",
+                "badge1": "98.7% fall detection (TUM, 2024)",
+                "badge2": "±0.22 MAE respiration rate (ETH Zurich, 2024)",
+                "badge3": "r=0.94 heart‑rate correlation (Fraunhofer IIS, 2024)",
+                "cta-pitch": "Request pitch deck",
+                "tech-title": "Scientifically Validated Technology",
+                "tech-intro": "HAVENIS AI uses Channel State Information (CSI) from standard WiFi routers to achieve DensePose-level accuracy through Machine Learning on the Hailo-8 edge chip.",
+                "pillars-title": "Three Functional Pillars",
+                "market-title": "Market & Growth",
+                "invest-title": "Investment Opportunity",
+                "team-title": "Team & Advisory",
+                "contact-title": "Get in Touch",
+                "seeking": "Seed Round | 20% Equity | €3.2M Pre-Money",
+                "use-title": "Use of Funds",
+                "exit": "Exit 2027–2028 | 8–12× ARR Multiple",
+                "exit-detail": "M&A Discussions: Google Nest, Amazon, Apple"
+            },
+            fr: {
+                "hero-kicker": "DeepTech • WiFi+IA • Privacy‑First",
+                "hero-headline": "Sécurité invisible – Santé omnisciente",
+                "hero-subhead": "L'IA reconstruit la posture 3D du corps et les données vitales à partir des réflexions Wi‑Fi — sans caméras, microphones ou wearables.",
+                "hero-pipeline": "Routeur Wi‑Fi → Extraction CSI → IA Edge (Hailo‑8) → SENSING CORE → Pose 3D + Vitaux → Tableau de bord Cloud",
+                "badge1": "98,7% détection de chute (TU Munich, 2024)",
+                "badge2": "±0,22 MAE fréquence respiratoire (ETH Zurich, 2024)",
+                "badge3": "r=0,94 corrélation fréquence cardiaque (Fraunhofer IIS, 2024)",
+                "cta-pitch": "Demander le pitch deck",
+                "tech-title": "Technologie Validée Scientifiquement",
+                "tech-intro": "HAVENIS AI utilise les informations d'état de canal (CSI) des routeurs WiFi standard pour atteindre une précision de niveau DensePose via l'apprentissage automatique sur la puce edge Hailo-8.",
+                "pillars-title": "Trois Piliers Fonctionnels",
+                "market-title": "Marché & Croissance",
+                "invest-title": "Opportunité d'Investissement",
+                "team-title": "Équipe & Conseillers",
+                "contact-title": "Prendre Contact",
+                "seeking": "Tour de Table Seed | 20% Equity | €3,2M Pre-Money",
+                "use-title": "Utilisation des Fonds",
+                "exit": "Exit 2027–2028 | Multiple 8–12× ARR",
+                "exit-detail": "Discussions M&A: Google Nest, Amazon, Apple"
+            }
+        };
+
+        // Language switching
+        let currentLang = 'de';
+        const langBtns = document.querySelectorAll('.lang-btn');
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentLang = btn.dataset.lang;
+                langBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                updateLanguage();
+            });
+        });
+
+        function updateLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+        }
+
+        // Form handling
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert(currentLang === 'de' ? 'Vielen Dank! Wir senden Ihnen das Pitchdeck zu.' : 
+                  currentLang === 'en' ? 'Thank you! We will send you the pitch deck.' :
+                  'Merci! Nous vous enverrons le pitch deck.');
+        });
+    </script>
+</body>
+</html>
